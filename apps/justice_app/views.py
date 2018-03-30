@@ -62,11 +62,22 @@ def login(request):
                     messages.error(request, error, extra_tags=tag)
                 return redirect('/')
 
+def dashboard(request):
+    me = User.objects.get(id=request.session['id'])
 
+    data = {
+        'user': User.objects.get(id=request.session['id']),
+        'mywishes': Wish.objects.filter(user=request.session['id']),
+        'changes': Change.objects.filter(user=request.session['id']),
+        'madewishes': Change.objects.filter(users=request.session['id'])
+    }
+
+    return render(request, 'justice_app/dashboard.html', data)
 
 def choose(request):
     data = {
         'user': User.objects.get(id=request.session['id']),
+        'changes': Change.objects.all()
     }
 
     return render(request, 'justice_app/index.html', data)
@@ -76,47 +87,133 @@ def health(request):
     if request.method == 'POST':
         request.session['health'] = request.POST['health']
 
-        # u = Change.objects.filter(each_change=request.session['health'])
-
-        # r = Quote.objects.create(insp=myrequest['insp'], quote_by=myrequest['quote_by'], user=u)
-        # r.save()
-
-        # if request.session['health'] ="gym":
-
-        # data = 
-        print request.session['health']
-
-    return render(request, 'justice_app/health.html')
-
-
+        ch = Change.objects.filter(each_change=request.session['health'])
+        print ch
+        # if len(ch) == 0:
+        #     u = User.objects.get(id=request.session['id'])
+        #     r = Change.objects.create(each_change=request.session['health'], user=u)
+        #     r.save()
+        #     errors = {}
+        #     errors['user_not_registered'] = "Your email was never found, please try again!"
+        #     for tag, error in errors.iteritems():
+        #         messages.error(request, error, extra_tags=tag)
+        #     return redirect('/choose')
+        # else:
+        this_user = User.objects.get(id=request.session['id'])
+        this_change = Change.objects.get(id=request.POST['health'])
+        this_change.users.add(this_user)
+        return render(request, 'justice_app/health.html')
 
 
 def music(request):
-    myrequest = request.POST
+    if request.method == 'POST':
+        request.session['music'] = request.POST['music']
 
-    data = {
-        'user': User.objects.get(id=request.session['id']),
-    }
+        ch = Change.objects.filter(each_change=request.session['music'])
+        
+        # if len(ch) == 0:
+        #     u = User.objects.get(id=request.session['id'])
+        #     r = Change.objects.create(each_change=request.session['music'], user=u)
+        #     r.save()
+        #     errors = {}
+        #     errors['user_not_registered'] = "Your email was never found, please try again!"
+        #     for tag, error in errors.iteritems():
+        #         messages.error(request, error, extra_tags=tag)
+        #     return redirect('/choose')
+        # else:
+        this_user = User.objects.get(id=request.session['id'])
+        this_change = Change.objects.get(id=request.POST['music'])
+        this_change.users.add(this_user)
+        return render(request, 'justice_app/music.html')
 
-    return render(request, 'justice_app/index.html', data)
 
 def travel(request):
-    myrequest = request.POST
+    if request.method == 'POST':
+        request.session['travel'] = request.POST['travel']
 
-    data = {
-        'user': User.objects.get(id=request.session['id']),
-    }
+        ch = Change.objects.filter(each_change=request.session['travel'])
+        
+        # if len(ch) == 0:
+        #     u = User.objects.get(id=request.session['id'])
+        #     r = Change.objects.create(each_change=request.session['travel'], user=u)
+        #     r.save()
+        #     errors = {}
+        #     errors['user_not_registered'] = "Your email was never found, please try again!"
+        #     for tag, error in errors.iteritems():
+        #         messages.error(request, error, extra_tags=tag)
+        #     return redirect('/choose')
+        # else:
+        this_user = User.objects.get(id=request.session['id'])
+        this_change = Change.objects.get(id=request.POST['travel'])
+        this_change.users.add(this_user)
+        return render(request, 'justice_app/travel.html')
 
-    return render(request, 'justice_app/index.html', data)
 
 def startup(request):
-    myrequest = request.POST
+    if request.method == 'POST':
+        request.session['startup'] = request.POST['startup']
 
-    data = {
-        'user': User.objects.get(id=request.session['id']),
-    }
+        ch = Change.objects.filter(each_change=request.session['startup'])
+        
+        # if len(ch) == 0:
+        #     u = User.objects.get(id=request.session['id'])
+        #     r = Change.objects.create(each_change=request.session['startup'], user=u)
+        #     r.save()
+        #     errors = {}
+        #     errors['user_not_registered'] = "Your email was never found, please try again!"
+        #     for tag, error in errors.iteritems():
+        #         messages.error(request, error, extra_tags=tag)
+        #     return redirect('/choose')
+        # else:
+        this_user = User.objects.get(id=request.session['id'])
+        this_change = Change.objects.get(id=request.POST['startup'])
+        this_change.users.add(this_user)
+        return render(request, 'justice_app/health.html')
 
-    return render(request, 'justice_app/index.html', data)
+
+def add_reason(request):
+    errors = Wish.objects.basic_validator(request.POST)
+    print "FROM USER", request.POST
+    if len(errors):
+        for tag, error in errors.iteritems():
+            messages.error(request, error, extra_tags=tag)
+    else: 
+        u = User.objects.get(id=request.session['id'])
+        r = Wish.objects.create(improve=request.POST['improve'], my_reason=request.POST['my_reason'], desc=request.POST['desc'], user=u)
+        r.save()
+
+        data = {
+                'user': User.objects.get(id=request.session['id']),
+            }
+        return redirect('/dashboard')
+
+
+# def music(request):
+#     myrequest = request.POST
+
+#     data = {
+#         'user': User.objects.get(id=request.session['id']),
+#     }
+
+#     return render(request, 'justice_app/index.html', data)
+
+# def travel(request):
+#     myrequest = request.POST
+
+#     data = {
+#         'user': User.objects.get(id=request.session['id']),
+#     }
+
+#     return render(request, 'justice_app/index.html', data)
+
+# def startup(request):
+#     myrequest = request.POST
+
+#     data = {
+#         'user': User.objects.get(id=request.session['id']),
+#     }
+
+#     return render(request, 'justice_app/index.html', data)
 
 
 

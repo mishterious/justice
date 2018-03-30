@@ -9,6 +9,12 @@ urlpatterns = [
     url(r'^login$', views.login),
 
     url(r'^choose$', views.choose),
+    url(r'^dashboard$', views.dashboard),
+
+    url(r'^add_reason$', views.add_reason),
+    # url(r'^add_music$', views.add_music),
+    # url(r'^add_travel$', views.add_travel),
+    # url(r'^add_startup$', views.add_travel),
 
     url(r'^health$', views.health),
     url(r'^music$', views.music),

@@ -67,6 +67,11 @@
         margin: 5px;
         padding: 0px;
     }
+
+    .back{
+        margin-top: 200px;
+        background-color: white;
+    }
 </style>
 <body>
     <div class="container">
@@ -75,7 +80,7 @@
             </div>
             <div class="col">
                 <h1 class="company">J.U.S.T.I.C.E</h1>
-                <h4 class="join"> What would you like to change?</h4>
+                <h4 class="join"> Here's how you can solve it! </h4>
             </div>  
             <div class="col">
                     <a href="/logout" class = 'i_b'>Logout</a>
@@ -84,33 +89,54 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col">
-                {% if request.session.health == "start"  %}
+            <div class="col back">
+                    <h2 class = 'i_b'>You're ready to go, {{user.alias}} </h2>
+                    <table>
+                            <tr>
+                              <th style="width:200px">What I Want to Do</th>
+                              <!-- <th style="width:250px">{{ user.name }} </th> -->
+                              <th style="width:250px">Startups</th>
+                              <th style="width:250px">Music</th>
+                              <th style="width:250px">Health</th>
+                              <th style="width:250px">Travel</th>
+                              <th style="width:150px">{{ wish.improve }}</th>
+                            </tr>
+                            {% for my in madewishes %}
+                                <tr>
+                                    <td>
+                                        <form action="/new_item">
+                                            <a href="/new_item/{{my.id}}">{{my.each_change}}</a>
+                                        </form>
+                                    </td>
+                                    <td><a href="https://www.ram.ac.uk/">The best musicias went here!</a></td>
+                                    <td><a href="https://www.skyscanner.com/">Check out how to fly!</a></td>
+                                    {% if request.session.id == my.user.id  %}
+                                        <td>
+                                            <!-- <a href="/delete/{{my.id}}" class = 'm'>Delete this Review</a> -->
+                                        <a href="http://www.meetup.com/">Check out Meetups</a>
+                                        </td>
+                                    {% else %}
+                                        <td><a href="/remove_from_list/{{my.id}}">Remove from my list</a></td>
+                                    {% endif %}
+                                    <td><a href="https://www.skyscanner.com/">Check out how to fly!</a></td>
+                                  </tr>
+                            {% endfor %}
+                    </table>
+
+                <!-- {% if request.session.health == "gym"  %}
                     <img class="mainpic" src="{% static "justice_app/bruce.jpeg" %}" alt="My image"/>
-                {% elif request.session.health == "design" %}
-                    <img class="mainpic" src="{% static "justice_app/health_run.jpg" %}" alt="My image"/>
-                {% elif request.session.health == "sell" %}
-                    <img class="mainpic" src="{% static "justice_app/health_run.jpg" %}" alt="My image"/>
-                {% elif request.session.health == "invest" %}
-                    <img class="mainpic" src="{% static "justice_app/health_run.jpg" %}" alt="My image"/>
                 {% else %}
-                <img class="mainpic" src="{% static "justice_app/health_run.jpg" %}" alt="My image"/>
-
-
-                {% endif %}
+                    <img class="mainpic" src="{% static "justice_app/health_run.jpg" %}" alt="My image"/>
+                {% endif %} -->
             </div>
-            <div class="col">
-            </div>
-            <div class="col">
-                {% load static %}
+                <!-- {% load static %}
                 <form action="/add_reason" method="post">
                     {% csrf_token %}
                     <p>What do you want to improve?<input type="text" name="improve"></p>
                     <p>What stopped you from doing it before?<input type="text" name="my_reason"></p>
                     <p>Tell us why you want to this to change: <textarea name="desc" id="" cols="30" rows="10"></textarea></p>
                     <input type="submit" style="float: right;" value="Register">
-                </form>
-            </div>
+                </form> -->
         </div>
     </div>
 

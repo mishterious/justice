@@ -75,14 +75,16 @@
         <div class="row">
             <div class="col space">
                 <form action="/startup" method="post">
+                    {% csrf_token %} 
                     {% load static %}
                     <img class="mainpic" src="{% static "justice_app/startup-idea-building.jpg" %}" alt="My image"/>
-                    <select class="block" name="idea" id="wants">
-                        <option value="opened">For Success!</option>
-                        <option value="start">Build a Startup</option>
-                        <option value="design">Design my Idea</option>
-                        <option value="sell">How to Sell</option>
-                        <option value="invest">Who Would Invest</option>
+                    <input type="hidden" name="this_change" value="startup">
+                    <select class="block" name="startup" id="wants">
+                        <option value="7">For Success!</option>
+                        <option value="8">Build a Startup</option>
+                        <option value="9">Design my Idea</option>
+                        <option value="10">How to Sell</option>
+                        <option value="11">Who Would Invest</option>
                     </select>
                     <button type="submit">Idea to Reality</button>
                 </form>
@@ -93,13 +95,14 @@
                 <form action="/music" method="post">
                     {% csrf_token %} 
                     <img class="mainpic" src="{% static "justice_app/how-to-make.jpeg" %}" alt="My image"/>
+                    <input type="hidden" name="this_change" value="music">
                     <select class="block" name="music" id="wants">
-                        <option value="opened">Great Music</option>
-                        <option value="sing">How to Sing</option>
-                        <option value="guiter">Be a Guitarist</option>
-                        <option value="base">Be a Bassplayer</option>
-                        <option value="drummer">Be a Drummer</option>
-                        <option value="piano">The World's Pianist</option>
+                        <option value="12"><a href=""></a> Great Music</option>
+                        <option value="13">How to Sing</option>
+                        <option value="6">Be a Guitarist</option>
+                        <option value="14">Be a Bassplayer</option>
+                        <option value="15">Be a Drummer</option>
+                        <option value="16's Pianist">The World's Pianist</option>
                     </select>
                     <button type="submit">Make My Music</button>
                 </form>
@@ -112,12 +115,13 @@
                 <form action="/health" method="post">
                     {% csrf_token %} 
                     <img class="mainpic" src="{% static "justice_app/yoga.jpg" %}" alt="My image"/>
+                    <input type="hidden" name="this_change" value="health">
                     <select class="block" name="health" id="wants">
-                        <option value="opened">Better Health</option>
-                        <option value="yoga">Go do Yoga</option>
-                        <option value="gym">Hit the Gym</option>
-                        <option value="job">Jog Every Week</option>
-                        <option value="eat">Eat Healthy</option>
+                        <option value="24">Better Health</option>
+                        <option value="5">Go do Yoga</option>
+                        <option value="17">Hit the Gym</option>
+                        <option value="18">Jog Every Week</option>
+                        <option value="19">Eat Healthy</option>
                     </select>
                     <button type="submit">Live Long and Prosper</button>
                 </form>
@@ -128,12 +132,13 @@
                 <form action="/travel" method="post">
                     {% csrf_token %} 
                     <img class="mainpic" src="{% static "justice_app/parisbeauty.jpeg" %}" alt="My image"/>
+                    <input type="hidden" name="this_change" value="travel">
                     <select class="block" name="travel" id="wants">
-                        <option value="opened">Love Travel</option>
-                        <option value="go">Where To Go</option>
-                        <option value="do">What To Do</option>
-                        <option value="see">What to See</option>
-                        <option value="party">Where to Party!</option>
+                        <option value="20">Love Travel</option>
+                        <option value="25">Where To Go</option>
+                        <option value="21">What To Do</option>
+                        <option value="22">What to See</option>
+                        <option value="23">Where to Party!</option>
                     </select>
                     <button type="submit">Go Everywhere!</button>
                 </form>

@@ -35,9 +35,11 @@ class UserManager(models.Manager):
 class ReasonManager(models.Manager):
     def basic_validator(self, postData):
         errors = {}
-        if len(postData['insp']) == 0: 
-            errors['insp_blank'] = "It seems like there should be more."
-        if len(postData['quote_by']) == 0: 
+        if len(postData['improve']) == 0: 
+            errors['improve_blank'] = "It seems like there should be more."
+        if len(postData['my_reason']) == 0: 
+            errors['who_blank'] = "Who made this quote???"
+        if len(postData['desc']) == 0: 
             errors['who_blank'] = "Who made this quote???"
         return errors
 
@@ -53,27 +55,17 @@ class User(models.Model):
     objects = UserManager()
 
 
-class Quote(models.Model):
-    insp = models.CharField(max_length=255)
-    quote_by = models.CharField(max_length=255)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    user = models.ForeignKey(User, related_name='my_contribution')
-    users = models.ManyToManyField(User, related_name="liked")
 
-    def __repr__(self):
-        return "<Blog object: {} {} {} {}>".format(self.insp, self.quote_by, self.user, self.users)
-
-
-class Reason(models.Model):
+class Wish(models.Model):
     improve = models.CharField(max_length=255)
+    my_reason = models.CharField(max_length=255)
     desc = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User, related_name='my_reason')
     objects = ReasonManager()
     def __repr__(self):
-        return "<Blog object: {} {} {} {}>".format(self.improve, self.desc)
+        return "<Blog object: {} {} {} {}>".format(self.improve, self.my_reason, self.desc, self.user)
 
 
 class Change(models.Model):
@@ -86,3 +78,22 @@ class Change(models.Model):
 
     def __repr__(self):
         return "<Blog object: {} {} {}>".format(self.each_change, self.user, self.users)
+
+
+
+
+
+
+
+
+
+class Quote(models.Model):
+    insp = models.CharField(max_length=255)
+    quote_by = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    user = models.ForeignKey(User, related_name='my_contribution')
+    users = models.ManyToManyField(User, related_name="liked")
+
+    def __repr__(self):
+        return "<Blog object: {} {} {} {}>".format(self.insp, self.quote_by, self.user, self.users)
