@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Justice</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    {% load static %}
+      <!-- The line above tells Django to be ready to listen for static files -->
+        <link rel="stylesheet" href="{% static 'justice_app/main.css' %}" media="screen" title="no title"  charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+<style>
+    body{
+        background-image: url("../../static/justice_app/bgpic.jpg");
+        height: 1000px;
+        background-color: #3D4C5A;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .company{
+        font-size: 120px;
+        color: #3D4C5A;
+    }
+
+    .join{
+        font-size: 36px;
+        color: #3D4C5A;
+        margin-bottom: 50px;
+        text-align: center;
+    }
+
+    .mainpic{
+        width: 300px;
+        height: 250px;
+        border: 2px solid #3D4C5A;
+    }
+
+    p {
+        text-align: right;
+    }
+
+    .space{
+        margin: 20px;
+    }
+
+    .block{
+        display: block;
+    }
+
+    .box{
+        position: relative;
+        margin-left: 0%;
+        margin-top: 0%;
+        display: inline-block;
+        
+        padding: 10px;
+        width: 30%;
+        vertical-align: top;
+    }
+    #bigger {
+        width: 60%;
+    }
+    p{
+        margin: 5px;
+        padding: 0px;
+    }
+</style>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+            </div>
+            <div class="col">
+                <h1 class="company">J.U.S.T.I.C.E</h1>
+                <h4 class="join"> What would you like to change?</h4>
+            </div>  
+            <div class="col">
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                {% if request.session.health == "gym"  %}
+                    <img class="mainpic" src="{% static "justice_app/bruce.jpeg" %}" alt="My image"/>
+                {% else %}
+                    <img class="mainpic" src="{% static "justice_app/health_run.jpg" %}" alt="My image"/>
+                {% endif %}
+            </div>
+            <div class="col">
+            </div>
+            <div class="col">
+                <form action="/add_health" method="post">
+                    {% load static %}
+                    <p>What do you want to improve?<input type="health" name='name'></p>
+                    <p>Reasons you haven't yet:<input type="text" name='email'></p>
+                    <p>Tell us why: <textarea name="desc" id="" cols="30" rows="10"></textarea></p>
+                    <input type="submit" style="float: right;" value="Register">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

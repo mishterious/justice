@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Justice</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    {% load static %}
+      <!-- The line above tells Django to be ready to listen for static files -->
+        <link rel="stylesheet" href="{% static 'justice_app/main.css' %}" media="screen" title="no title"  charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+<style>
+    body{
+        background-image: url("../../static/justice_app/bgpic.jpg");
+        height: 1000px;
+        background-color: #3D4C5A;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .company{
+        font-size: 120px;
+        color: #3D4C5A;
+        margin-bottom: 50px;
+    }
+
+    .mainpic{
+        width: 300px;
+        height: 250px;
+        border: 2px solid #3D4C5A;
+    }
+
+    .space{
+        margin: 20px;
+    }
+
+    .block{
+        display: block;
+    }
+
+    .box{
+        position: relative;
+        margin-left: 0%;
+        margin-top: 0%;
+        display: inline-block;
+        
+        padding: 10px;
+        width: 30%;
+        vertical-align: top;
+    }
+    #bigger {
+        width: 60%;
+    }
+    p{
+        margin: 5px;
+        padding: 0px;
+    }
+</style>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+            </div>
+            <div class="col">
+                <h4 class="company">J.U.S.T.I.C.E</h4>
+            </div>
+            <div class="col">
+                <a href="/logout" class = 'i_b'>Logout</a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col space">
+                <form action="/startup" method="post">
+                    {% load static %}
+                    <img class="mainpic" src="{% static "justice_app/startup-idea-building.jpg" %}" alt="My image"/>
+                    <select class="block" name="idea" id="wants">
+                        <option value="opened">For Success!</option>
+                        <option value="start">Build a Startup</option>
+                        <option value="design">Design my Idea</option>
+                        <option value="sell">How to Sell</option>
+                        <option value="invest">Who Would Invest</option>
+                    </select>
+                    <button type="submit">Idea to Reality</button>
+                </form>
+            </div>
+            <div class="col">
+            </div>
+            <div class="col space">
+                <form action="/music" method="post">
+                    {% csrf_token %} 
+                    <img class="mainpic" src="{% static "justice_app/how-to-make.jpeg" %}" alt="My image"/>
+                    <select class="block" name="music" id="wants">
+                        <option value="opened">Great Music</option>
+                        <option value="sing">How to Sing</option>
+                        <option value="guiter">Be a Guitarist</option>
+                        <option value="base">Be a Bassplayer</option>
+                        <option value="drummer">Be a Drummer</option>
+                        <option value="piano">The World's Pianist</option>
+                    </select>
+                    <button type="submit">Make My Music</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col space">
+                <form action="/health" method="post">
+                    {% csrf_token %} 
+                    <img class="mainpic" src="{% static "justice_app/yoga.jpg" %}" alt="My image"/>
+                    <select class="block" name="health" id="wants">
+                        <option value="opened">Better Health</option>
+                        <option value="yoga">Go do Yoga</option>
+                        <option value="gym">Hit the Gym</option>
+                        <option value="job">Jog Every Week</option>
+                        <option value="eat">Eat Healthy</option>
+                    </select>
+                    <button type="submit">Live Long and Prosper</button>
+                </form>
+            </div>
+            <div class="col">
+            </div>
+            <div class="col space">
+                <form action="/travel" method="post">
+                    {% csrf_token %} 
+                    <img class="mainpic" src="{% static "justice_app/parisbeauty.jpeg" %}" alt="My image"/>
+                    <select class="block" name="travel" id="wants">
+                        <option value="opened">Love Travel</option>
+                        <option value="go">Where To Go</option>
+                        <option value="do">What To Do</option>
+                        <option value="see">What to See</option>
+                        <option value="party">Where to Party!</option>
+                    </select>
+                    <button type="submit">Go Everywhere!</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
