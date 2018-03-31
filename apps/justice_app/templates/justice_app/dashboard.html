@@ -83,7 +83,8 @@
                 <h4 class="join"> Here's how you can solve it! </h4>
             </div>  
             <div class="col">
-                    <a href="/logout" class = 'i_b'>Logout</a>
+                    <a href="/choose" class = 'i_b'>Go Big</a>
+                    <a href="/logout" class = 'i_b' style="padding-left: 20px;" >Go Home(Logout)</a>
             </div>
         </div>
     </div>
@@ -108,17 +109,16 @@
                                             <a href="/new_item/{{my.id}}">{{my.each_change}}</a>
                                         </form>
                                     </td>
-                                    <td><a href="https://www.ram.ac.uk/">The best musicias went here!</a></td>
-                                    <td><a href="https://www.skyscanner.com/">Check out how to fly!</a></td>
+                                    <td><a href="http://www.codingdojo.com/">You REALLY to? Start here!</a></td>
+                                    <td><a href="https://www.ram.ac.uk/">Make Music here!</a></td>
                                     {% if request.session.id == my.user.id  %}
                                         <td>
-                                            <!-- <a href="/delete/{{my.id}}" class = 'm'>Delete this Review</a> -->
                                         <a href="http://www.meetup.com/">Check out Meetups</a>
                                         </td>
                                     {% else %}
                                         <td><a href="/remove_from_list/{{my.id}}">Remove from my list</a></td>
                                     {% endif %}
-                                    <td><a href="https://www.skyscanner.com/">Check out how to fly!</a></td>
+                                    <td><a href="https://www.skyscanner.com/">It's Time to Fly!</a></td>
                                   </tr>
                             {% endfor %}
                     </table>
